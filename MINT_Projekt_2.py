@@ -1,0 +1,169 @@
+import streamlit as st
+import random
+import matplotlib.pyplot as plt
+import numpy as np
+import math
+import pandas as pd
+
+# --- Page Configuration ---
+st.set_page_config(
+    page_title="Dice Roll Dashboard",
+    page_icon="🎲",
+    layout="wide"
+)
+
+
+# --- Core Experiment Functions ---
+
+def run_experiment_e1():
+    """
+    Simulates Experiment (E1):
+    Rolls a 6-sided die 20 times and returns the sum.
+    """
+    total_sum = 0
+    for _ in range(20):
+        total_sum += random.randint(1, 6)
+    return total_sum
+
+
+def gaussian_curve(x, mu, variance):
+    """
+    Calculates the value of the Gaussian curve (normal distribution)
+    using the formula from the project.
+    """
+    sigma = math.sqrt(variance)
+    coefficient = 1 / (sigma * math.sqrt(2 * math.pi))
+    exponent = -((x - mu) ** 2) / (2 * variance)
+    return coefficient * math.exp(exponent)
+
+
+# --- Sidebar (Controls) ---
+st.sidebar.title("MINT Projekt 2")
+st.sidebar.header("Simulation Controls")
+
+# Radio button to select 21 or 42 experiments
+num_experiments = st.sidebar.radio(
+    "Choose your group (Number of Experiments):",
+    (21, 42),
+    captions=["Group G1 (21 runs)", "Group G2 (42 runs)"],
+    index=1,  # Default to 42 (G2)
+    horizontal=True
+)
+
+# Button to re-run the simulation
+st.sidebar.button("Re-run Simulation", type="primary")
+
+# --- Run Simulation ---
+results = [run_experiment_e1() for _ in range(num_experiments)]
+
+# --- Theoretical Parameters ---
+mu = 70  # Theoretical mean (20 * 3.5)
+variance = 20 * (35 / 12)  # Theoretical variance
+sigma = math.sqrt(variance)
+
+# --- Actual Statistics from Simulation ---
+actual_mean = np.mean(results)
+actual_variance = np.var(results)
+
+# --- Main Page Layout ---
+st.title("🎲 Würfeln und der Zentrale Grenzwertsatz")
+st.markdown(f"Displaying results for **{num_experiments}** experiments (Group G{1 if num_experiments == 21 else 2}).")
+
+# --- Tabs for Content ---
+# MODIFICATION: We now only have TWO tabs.
+dashboard_tab, info_tab = st.tabs(["📊 Dashboard", "ℹ️ Project Info"])
+
+# --- This tab contains BOTH the plot and the data table ---
+with dashboard_tab:
+    st.header("Statistical Comparison")
+
+    # Display Theoretical vs. Actual stats side-by-side
+    col1, col2 = st.columns(2)
+    with col1:
+        st.subheader("Theoretical Stats")
+        st.metric("Mean (μ)", f"{mu:.2f}")
+        st.metric("Variance (σ²)", f"{variance:.2f}")
+    with col2:
+        st.subheader("Simulation Stats")
+        st.metric("Actual Mean", f"{actual_mean:.2f}")
+        st.metric("Actual Variance", f"{actual_variance:.2f}")
+
+    st.header("Histogram vs. Gaussian Curve")
+
+    # --- Create the Plot ---
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    class_width = 5
+    bins = np.arange(30, 111, class_width)
+
+    ax.hist(results, bins=bins, density=True, alpha=0.7,
+            edgecolor='black', label=f'Histogram of {num_experiments} Results')
+
+    x_curve = np.linspace(mu - 4 * sigma, mu + 4 * sigma, 200)
+    y_curve = [gaussian_curve(val, mu, variance) for val in x_curve]
+    ax.plot(x_curve, y_curve, 'r-', linewidth=2,
+            label=f'Gaussian Curve (μ=70, σ²={variance:.2f})')
+
+    ax.set_title("Dice Sum Distribution")
+    ax.set_xlabel("Sum of 20 Dice Rolls")
+    ax.set_ylabel("Density")
+    ax.legend()
+    ax.grid(axis='y', linestyle='--', alpha=0.7)
+
+    st.pyplot(fig)
+
+    st.markdown("""
+    **Observation:**
+    Notice how the histogram (blue bars) fits the theoretical Gaussian curve (red line).
+    * With 21 experiments (G1), the fit is usually rough.
+    * With 42 experiments (G2), the fit is noticeably better.
+    """)
+
+    # --- ADDED THE DATA TABLE HERE ---
+    st.header(f"Raw Data for {num_experiments} Experiments")
+    st.markdown(
+        "Here are the individual sums from each experiment. You can sort the table by clicking the column headers.")
+
+    df = pd.DataFrame({
+        "Experiment #": range(1, num_experiments + 1),
+        "Sum of 20 Dice": results
+    })
+
+    st.dataframe(df, height=500, use_container_width=True)
+
+# --- This tab contains the project info ---
+with info_tab:
+    st.header("About The Project")
+    st.markdown("""
+    This dashboard simulates the MINT Projekt 2.
+
+    ### The Experiment (E1)
+    The core task is to **roll a standard six-sided die 20 times and sum the results** (the face values).
+
+    ### Group Tasks
+    * **Group 1 ($G_1$):** Performs this experiment **21 times**.
+    * **Group 2 ($G_2$):** Performs this experiment **42 times**.
+
+    ### The Goal
+    The project asks us to compare the resulting histogram of these sums to a specific Gaussian curve:
+    $$f(x) = \\frac{1}{\\sqrt{2\\pi\\sigma^{2}}} \\exp\\left(-\\frac{(x-70)^{2}}{2\\sigma^{2}}\\right)$$
+
+    ...where the variance is given as $\\sigma^{2} = 20 \cdot \\frac{35}{12}$.
+
+    ---
+
+    ### Zusatzfrage (Additional Question)
+    **What happens if we use a 12-sided die instead of a 6-sided one?**
+
+    The experiment (summing 20 rolls) would still produce a bell curve, but the curve's parameters would change:
+
+    1.  **The Mean (μ) would be 130:**
+        * Average of one 12-sided die: `(1+2+...+12) / 12 = 6.5`
+        * New Mean: `20 rolls * 6.5 = 130`
+
+    2.  **The Variance (σ²) would be ~238.33:**
+        * Variance of one 12-sided die: `(12² - 1) / 12 = 143 / 12 ≈ 11.917`
+        * New Variance: `20 rolls * (143 / 12) ≈ 238.33`
+
+    **Conclusion:** The bell curve would be centered at **130** and would be **wider** than the curve for the 6-sided die.
+    """)
