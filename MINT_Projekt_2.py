@@ -34,9 +34,11 @@ def gaussian_curve(x, mu, variance):
     exponent = -((x - mu) ** 2) / (2 * variance)
     return coefficient * math.exp(exponent)
 
-
+logo_url = "https://upload.wikimedia.org/wikipedia/commons/c/c1/Mul-logo_color_hoch.svg"
+st.sidebar.image(logo_url)
 st.sidebar.title("MINT Projekt 2")
 st.sidebar.header("Simulation Controls")
+
 
 num_experiments = st.sidebar.radio(
     "Choose your group (Number of Experiments):",
