@@ -5,7 +5,6 @@ import numpy as np
 import math
 import pandas as pd
 
-# --- Page Configuration ---
 st.set_page_config(
     page_title="Dice Roll Dashboard",
     page_icon="🎲",
@@ -13,7 +12,6 @@ st.set_page_config(
 )
 
 
-# --- Core Experiment Functions ---
 
 def run_experiment_e1():
     """
@@ -37,11 +35,9 @@ def gaussian_curve(x, mu, variance):
     return coefficient * math.exp(exponent)
 
 
-# --- Sidebar (Controls) ---
 st.sidebar.title("MINT Projekt 2")
 st.sidebar.header("Simulation Controls")
 
-# Radio button to select 21 or 42 experiments
 num_experiments = st.sidebar.radio(
     "Choose your group (Number of Experiments):",
     (21, 42),
@@ -50,34 +46,25 @@ num_experiments = st.sidebar.radio(
     horizontal=True
 )
 
-# Button to re-run the simulation
 st.sidebar.button("Re-run Simulation", type="primary")
 
-# --- Run Simulation ---
 results = [run_experiment_e1() for _ in range(num_experiments)]
 
-# --- Theoretical Parameters ---
 mu = 70  # Theoretical mean (20 * 3.5)
 variance = 20 * (35 / 12)  # Theoretical variance
 sigma = math.sqrt(variance)
 
-# --- Actual Statistics from Simulation ---
 actual_mean = np.mean(results)
 actual_variance = np.var(results)
 
-# --- Main Page Layout ---
 st.title("🎲 Würfeln und der Zentrale Grenzwertsatz")
 st.markdown(f"Displaying results for **{num_experiments}** experiments (Group G{1 if num_experiments == 21 else 2}).")
 
-# --- Tabs for Content ---
-# MODIFICATION: We now only have TWO tabs.
 dashboard_tab, info_tab = st.tabs(["📊 Dashboard", "ℹ️ Project Info"])
 
-# --- This tab contains BOTH the plot and the data table ---
 with dashboard_tab:
     st.header("Statistical Comparison")
 
-    # Display Theoretical vs. Actual stats side-by-side
     col1, col2 = st.columns(2)
     with col1:
         st.subheader("Theoretical Stats")
@@ -90,7 +77,6 @@ with dashboard_tab:
 
     st.header("Histogram vs. Gaussian Curve")
 
-    # --- Create the Plot ---
     fig, ax = plt.subplots(figsize=(10, 6))
 
     class_width = 5
@@ -119,7 +105,6 @@ with dashboard_tab:
     * With 42 experiments (G2), the fit is noticeably better.
     """)
 
-    # --- ADDED THE DATA TABLE HERE ---
     st.header(f"Raw Data for {num_experiments} Experiments")
     st.markdown(
         "Here are the individual sums from each experiment. You can sort the table by clicking the column headers.")
