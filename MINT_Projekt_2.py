@@ -135,35 +135,4 @@ with dashboard_tab:
 with info_tab:
     st.header("About The Project")
     st.markdown("""
-    This dashboard simulates the MINT Projekt 2.
-
-    ### The Experiment (E1)
-    The core task is to **roll a standard six-sided die 20 times and sum the results** (the face values).
-
-    ### Group Tasks
-    * **Group 1 ($G_1$):** Performs this experiment **21 times**.
-    * **Group 2 ($G_2$):** Performs this experiment **42 times**.
-
-    ### The Goal
-    The project asks us to compare the resulting histogram of these sums to a specific Gaussian curve:
-    $$f(x) = \\frac{1}{\\sqrt{2\\pi\\sigma^{2}}} \\exp\\left(-\\frac{(x-70)^{2}}{2\\sigma^{2}}\\right)$$
-
-    ...where the variance is given as $\\sigma^{2} = 20 \cdot \\frac{35}{12}$.
-
-    ---
-
-    ### Zusatzfrage (Additional Question)
-    **What happens if we use a 12-sided die instead of a 6-sided one?**
-
-    The experiment (summing 20 rolls) would still produce a bell curve, but the curve's parameters would change:
-
-    1.  **The Mean (μ) would be 130:**
-        * Average of one 12-sided die: `(1+2+...+12) / 12 = 6.5`
-        * New Mean: `20 rolls * 6.5 = 130`
-
-    2.  **The Variance (σ²) would be ~238.33:**
-        * Variance of one 12-sided die: `(12² - 1) / 12 = 143 / 12 ≈ 11.917`
-        * New Variance: `20 rolls * (143 / 12) ≈ 238.33`
-
-    **Conclusion:** The bell curve would be centered at **130** and would be **wider** than the curve for the 6-sided die.
-    """)
+    ##    """)
