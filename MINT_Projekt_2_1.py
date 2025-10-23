@@ -17,13 +17,13 @@ st.set_page_config(
 
 def run_experiment(num_rolls, die_sides):
     """
-    Simulates one experiment:
-    Rolls a die `num_rolls` times and returns the sum.
+    Simulates 1 experiment:
+    Rolls a dice `num_rolls` times and returns the sum.
     """
     return sum(random.randint(1, die_sides) for _ in range(num_rolls))
 
 def calculate_theoretical_stats(num_rolls, die_sides):
-    """Calculates the theoretical mean and variance."""
+    """Calcul de la moyenne et de la variance théoriques."""
     # Mean and variance of a single die roll
     mu_one = (die_sides + 1) / 2
     var_one = (die_sides**2 - 1) / 12
@@ -40,12 +40,12 @@ def gaussian_curve(x, mu, variance):
            math.exp(-((x - mu)**2) / (2 * variance))
 
 # --- Sidebar (Controls) ---
-st.sidebar.title("MINT Projekt 2")
+st.sidebar.title("MINT Math Project 2")
 st.sidebar.header("Simulation Controls")
 
 # INTERACTIVE WIDGET for the "Additional Question"
-die_sides = st.sidebar.selectbox(
-    "1. Die Type (Sides)",
+dice_sides = st.sidebar.selectbox(
+    "1. Dice Type (Sides)",
     (6, 12),
     index=0, # Default to 6
     help="Select the number of sides on the die. The project asks for 6, with an additional question about 12."
