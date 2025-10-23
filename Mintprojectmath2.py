@@ -50,7 +50,7 @@ if not st.session_state.show_dashboard:
     This interactive dashboard is a simulation for the **MINT Mathematics Project 2**, demonstrating the
     **Central Limit Theorem (CLT)** in action.
     
-    - **Experiment:** See what happens when you roll a die 20 times and sum the results.
+    - **Experiment:** See what happens when you roll a dice 20 times and sum the results.
     - **Observe:** Watch how the histogram of these sums (your data) starts to form a perfect
       bell curve (the Gaussian distribution) as you run more experiments.
     - **Analyze:** Use the in-depth statistics to see how well your data matches the theory.
@@ -94,17 +94,17 @@ if not st.session_state.show_dashboard:
 # --- 3. MAIN DASHBOARD LOGIC ---
 else:
     # --- Core Experiment & Stat Functions ---
-    def run_experiment(num_rolls, die_sides):
+    def run_experiment(num_rolls, dice_sides):
         """
         Simulates one experiment:
         Rolls a dice `num_rolls` times and returns the sum.
         """
-        return sum(random.randint(1, die_sides) for _ in range(num_rolls))
+        return sum(random.randint(1, dice_sides) for _ in range(num_rolls))
 
-    def calculate_theoretical_stats(num_rolls, die_sides):
+    def calculate_theoretical_stats(num_rolls, dice_sides):
         """Calculates the theoretical mean and variance."""
-        mu_one = (die_sides + 1) / 2
-        var_one = (die_sides**2 - 1) / 12
+        mu_one = (dice_sides + 1) / 2
+        var_one = (dice_sides**2 - 1) / 12
         total_mu = num_rolls * mu_one
         total_var = num_rolls * var_one
         return total_mu, total_var
@@ -124,16 +124,16 @@ else:
         st.session_state.show_dashboard = False
         st.rerun()
 
-    die_sides = st.sidebar.selectbox(
-        "1. Die Type (Sides)",
+    dice_sides = st.sidebar.selectbox(
+        "1. Dice Type (Sides)",
         (6, 12),
         index=0,
-        help="Select the number of sides on the die. The project asks for 6, with an additional question about 12."
+        help="Select the number of sides on the dice. The project asks for 6, with an additional question about 12."
     )
     num_rolls = st.sidebar.slider(
         "2. Rolls per Experiment (N)",
         1, 50, 20,
-        help="Number of times to roll the die and sum the result in a *single* experiment. The project specifies 20."
+        help="Number of times to roll the dice and sum the result in a *single* experiment. The project specifies 20."
     )
     num_experiments = st.sidebar.number_input(
         "3. Number of Experiments (Samples)",
@@ -145,8 +145,8 @@ else:
     st.sidebar.button("Re-run Simulation", type="primary")
 
     # --- Run Simulation & Calculations ---
-    results = [run_experiment(num_rolls, die_sides) for _ in range(num_experiments)]
-    mu, variance = calculate_theoretical_stats(num_rolls, die_sides)
+    results = [run_experiment(num_rolls, dice_sides) for _ in range(num_experiments)]
+    mu, variance = calculate_theoretical_stats(num_rolls, dice_sides)
     sigma = math.sqrt(variance)
     actual_mean = np.mean(results)
     actual_var = np.var(results)
@@ -161,7 +161,7 @@ else:
 
     # --- Main Page Layout ---
     st.title("🎲 Central Limit Theorem Dashboard")
-    st.markdown(f"Simulating **{num_experiments}** experiments, each summing **{num_rolls}** rolls of a **{die_sides}-sided** die.")
+    st.markdown(f"Simulating **{num_experiments}** experiments, each summing **{num_rolls}** rolls of a **{dice_sides}-sided** dice.")
 
     tab_main, tab_stats, tab_info = st.tabs(
         ["📊 Main Plot", "📈 In-Depth Analysis", "ℹ️ Project Info"]
@@ -191,14 +191,14 @@ else:
         ax.grid(axis='y', linestyle='--', alpha=0.7)
         st.pyplot(fig)
 
-        st.header("The 'Before' Picture: Distribution of a Single Die Roll")
-        st.markdown("The CLT is powerful because it takes a *uniform* distribution (one die roll) and produces a *normal* distribution (a bell curve) when you sum many of them.")
+        st.header("The 'Before' Picture: Distribution of a Single Dice Roll")
+        st.markdown("The CLT is powerful because it takes a *uniform* distribution (one dice roll) and produces a *normal* distribution (a bell curve) when you sum many of them.")
         
-        single_die_data = pd.DataFrame(
-            {'Probability': [1/die_sides] * die_sides},
-            index=range(1, die_sides + 1)
+        single_dice_data = pd.DataFrame(
+            {'Probability': [1/dice_sides] * dice_sides},
+            index=range(1, dice_sides + 1)
         )
-        st.bar_chart(single_die_data)
+        st.bar_chart(single_dice_data)
 
     with tab_stats:
         st.header("In-Depth Statistical Analysis")
@@ -255,7 +255,7 @@ else:
         This dashboard simulates the **MINT Projekt 2** on the **Central Limit Theorem (CLT)**.
         
         ### The Original Experiment (E1)
-        * **Task:** Roll a 6-sided die 20 times and sum the results.
+        * **Task:** Roll a 6-sided dice 20 times and sum the results.
         * **Group 1 ($G_1$):** Repeat this experiment 21 times.
         * **Group 2 ($G_2$):** Repeat this experiment 42 times.
         * **Goal:** Compare the resulting histogram to the specific Gaussian curve:
