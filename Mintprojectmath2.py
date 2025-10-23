@@ -16,7 +16,7 @@ st.set_page_config(
 )
 
 # ---  PUBLIC APP URL  ---
-APP_URL = "https://testpy-xhdwrcnufmqcjxeyfvl4qu.streamlit.app/" 
+APP_URL = "https://mint-project-math-2.streamlit.app/" 
 
 
 # --- Generate QR Code ---
