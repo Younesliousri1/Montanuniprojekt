@@ -18,7 +18,7 @@ st.set_page_config(
 # --- 1. SET YOUR PUBLIC APP URL HERE ---
 # Find this in your Streamlit Cloud "Manage app" menu.
 # It should look like: https://your-app-name.streamlit.app
-APP_URL = "https://testpy-xhdwrcnufmqcjxeyfvl4qu.streamlit.app/" 
+APP_URL = "https://your-app-name.streamlit.app" 
 
 
 # --- Helper Function to Generate QR Code ---
@@ -75,6 +75,7 @@ if not st.session_state.show_dashboard:
             except Exception as e:
                 st.error(f"Error generating QR code: {e}")
 
+    # --- MODIFICATION: Added Creators List Here ---
     with col2:
         st.subheader("Creators")
         st.markdown("""
@@ -256,13 +257,13 @@ else:
         This dashboard simulates the **MINT Projekt 2** on the **Central Limit Theorem (CLT)**.
         
         ### The Original Experiment (E1)
-        * [cite_start]**Task:** Roll a 6-sided die 20 times and sum the results. [cite: 7]
-        * [cite_start]**Group 1 ($G_1$):** Repeat this experiment 21 times. [cite: 6]
-        * [cite_start]**Group 2 ($G_2$):** Repeat this experiment 42 times. [cite: 11]
-        * [cite_start]**Goal:** Compare the resulting histogram to the specific Gaussian curve: [cite: 12]
-            [cite_start]$$f(x) = \\frac{1}{\\sqrt{2\\pi\\sigma^{2}}} \\exp\\left(-\\frac{(x-70)^{2}}{2\\sigma^{2}}\\right)$$ [cite: 14]
-            [cite_start]...where $\\mu = 70$ and $\\sigma^{2} = 20 \cdot \\frac{35}{12}$. [cite: 14, 16]
+        * **Task:** Roll a 6-sided die 20 times and sum the results.
+        * **Group 1 ($G_1$):** Repeat this experiment 21 times.
+        * **Group 2 ($G_2$):** Repeat this experiment 42 times.
+        * **Goal:** Compare the resulting histogram to the specific Gaussian curve:
+            $$f(x) = \\frac{1}{\\sqrt{2\\pi\\sigma^{2}}} \\exp\\left(-\\frac{(x-70)^{2}}{2\\sigma^{2}}\\right)$$
+            ...where $\\mu = 70$ and $\\sigma^{2} = 20 \cdot \\frac{35}{12}$.
             
         ### This Dashboard
-        [cite_start]This app allows you to run the simulation and also interactively explore the **Zusatzfrage (Additional Question)** by changing the die type from 6-sided to 12-sided. [cite: 21] You can also see the effect of changing the number of rolls (N) and the number of experiments (Samples).
+        This app allows you to run the simulation and also interactively explore the **Zusatzfrage (Additional Question)** by changing the die type from 6-sided to 12-sided. You can also see the effect of changing the number of rolls (N) and the number of experiments (Samples).
         """)
