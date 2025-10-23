@@ -8,28 +8,26 @@ import scipy.stats as stats
 import qrcode
 from io import BytesIO
 
-# --- Page Configuration (Must be the first st command) ---
+# --- 1. Page Configuration  ---
 st.set_page_config(
     page_title="Central Limit Theorem Dashboard",
     page_icon="🎲",
     layout="wide"
 )
 
-# --- 1. SET YOUR PUBLIC APP URL HERE ---
+# ---  PUBLIC APP URL  ---
 # Find this in your Streamlit Cloud "Manage app" menu.
 # It should look like: https://your-app-name.streamlit.app
-APP_URL = "https://your-app-name.streamlit.app" 
+APP_URL = "https://testpy-xhdwrcnufmqcjxeyfvl4qu.streamlit.app/" 
 
 
-# --- Helper Function to Generate QR Code ---
+# --- Generate QR Code ---
 def generate_qr_code(url):
     """Generates a QR code image from a URL."""
     qr = qrcode.QRCode(version=1, box_size=10, border=5)
     qr.add_data(url)
     qr.make(fit=True)
     img = qr.make_image(fill_color="black", back_color="white")
-    
-    # Save image to an in-memory buffer
     buf = BytesIO()
     img.save(buf)
     return buf.getvalue()
@@ -93,13 +91,13 @@ if not st.session_state.show_dashboard:
         - **Controls:** Use the sidebar (on the next page) to change parameters.
         """)
 
-# --- 3. MAIN DASHBOARD LOGIC (Your existing code) ---
+# --- 3. MAIN DASHBOARD LOGIC ---
 else:
     # --- Core Experiment & Stat Functions ---
     def run_experiment(num_rolls, die_sides):
         """
         Simulates one experiment:
-        Rolls a die `num_rolls` times and returns the sum.
+        Rolls a dice `num_rolls` times and returns the sum.
         """
         return sum(random.randint(1, die_sides) for _ in range(num_rolls))
 
