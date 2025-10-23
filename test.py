@@ -18,7 +18,7 @@ st.set_page_config(
 # --- 1. SET YOUR PUBLIC APP URL HERE ---
 # Find this in your Streamlit Cloud "Manage app" menu.
 # It should look like: https://your-app-name.streamlit.app
-APP_URL = "https://your-app-name.streamlit.app" 
+APP_URL = "https://testpy-xhdwrcnufmqcjxeyfvl4qu.streamlit.app/" 
 
 
 # --- Helper Function to Generate QR Code ---
