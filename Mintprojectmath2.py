@@ -86,7 +86,7 @@ if not st.session_state.show_dashboard:
 
         st.subheader("Project Details")
         st.markdown("""
-        - **Project:** MINT Projekt 2
+        - **Project:** Mint – Mathematik Projekt 2
         - **Topic:** Würfeln und der Zentrale Grenzwertsatz
         - **Controls:** Use the sidebar (on the next page) to change parameters.
         """)
