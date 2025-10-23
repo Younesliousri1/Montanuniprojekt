@@ -75,7 +75,7 @@ st.sidebar.button("Re-run Simulation", type="primary")
 results = [run_experiment(num_rolls, dice_sides) for _ in range(num_experiments)]
 
 # 2. Get Theoretical stats
-mu, variance = calculate_theoretical_stats(num_rolls, die_sides)
+mu, variance = calculate_theoretical_stats(num_rolls, dice_sides)
 sigma = math.sqrt(variance)
 
 # 3. Get Actual (Sample) stats
