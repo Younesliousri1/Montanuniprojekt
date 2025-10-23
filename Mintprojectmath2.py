@@ -16,8 +16,6 @@ st.set_page_config(
 )
 
 # ---  PUBLIC APP URL  ---
-# Find this in your Streamlit Cloud "Manage app" menu.
-# It should look like: https://your-app-name.streamlit.app
 APP_URL = "https://testpy-xhdwrcnufmqcjxeyfvl4qu.streamlit.app/" 
 
 
@@ -73,7 +71,7 @@ if not st.session_state.show_dashboard:
             except Exception as e:
                 st.error(f"Error generating QR code: {e}")
 
-    # --- MODIFICATION: Added Creators List Here ---
+    # --- Creators List Here ---
     with col2:
         st.subheader("Creators")
         st.markdown("""
@@ -116,7 +114,7 @@ else:
                math.exp(-((x - mu)**2) / (2 * variance))
 
     # --- Sidebar (Controls) ---
-    st.sidebar.title("MINT Projekt 2")
+    st.sidebar.title("MINT Project 2")
     st.sidebar.header("Simulation Controls")
     
     # Button to go back to the Welcome Page
