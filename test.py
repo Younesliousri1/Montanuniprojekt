@@ -76,14 +76,20 @@ if not st.session_state.show_dashboard:
                 st.error(f"Error generating QR code: {e}")
 
     with col2:
-        st.subheader("About the Project")
+        st.subheader("Creators")
         st.markdown("""
-        - **Project:** Mint – Mathematik Projekt 2
-        - **Topic:** Würfeln und der Zentrale Grenzwertsatz / Rolling dice and the Central Limit Theorem
-        - **Controls:** Use the sidebar (on the next page) to change parameters like:
-            - Dice Type (6-sided or 12-sided)
-            - Rolls per Experiment (N)
-            - Number of Experiments (Samples)
+        - **Younes Liousri:** `younes.liousri@stud.unileoben.ac.at`
+        - **Alexander Holzinger:** `alexander.holzinger@stud.unileoben.ac.at`
+        - **Asim Spahić:** `asim.spahic@stud.unileoben.ac.at`
+        - **Muhammad Waseem:** `muhammad.waseem@stud.unileoben.ac.at`
+        - **Andreas Weixlbaumer:** `andreas.weixlbaumer@stud.unileoben.ac.at`
+        """)
+
+        st.subheader("Project Details")
+        st.markdown("""
+        - **Project:** MINT Projekt 2
+        - **Topic:** Würfeln und der Zentrale Grenzwertsatz
+        - **Controls:** Use the sidebar (on the next page) to change parameters.
         """)
 
 # --- 3. MAIN DASHBOARD LOGIC (Your existing code) ---
