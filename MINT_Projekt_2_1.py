@@ -72,7 +72,7 @@ st.sidebar.button("Re-run Simulation", type="primary")
 # --- Run Simulation & Calculations ---
 
 # 1. Run the simulation
-results = [run_experiment(num_rolls, die_sides) for _ in range(num_experiments)]
+results = [run_experiment(num_rolls, dice_sides) for _ in range(num_experiments)]
 
 # 2. Get Theoretical stats
 mu, variance = calculate_theoretical_stats(num_rolls, die_sides)
