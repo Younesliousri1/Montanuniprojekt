@@ -262,6 +262,4 @@ else:
             $$f(x) = \\frac{1}{\\sqrt{2\\pi\\sigma^{2}}} \\exp\\left(-\\frac{(x-70)^{2}}{2\\sigma^{2}}\\right)$$
             ...where $\\mu = 70$ and $\\sigma^{2} = 20 \cdot \\frac{35}{12}$.
             
-        ### This Dashboard
-        This app allows you to run the simulation and also interactively explore the **Zusatzfrage (Additional Question)** by changing the die type from 6-sided to 12-sided. You can also see the effect of changing the number of rolls (N) and the number of experiments (Samples).
         """)
