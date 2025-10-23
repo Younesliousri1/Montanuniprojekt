@@ -136,7 +136,7 @@ with tab_main:
     
     # Plot for a single die roll
     single_die_data = pd.DataFrame(
-        {'Probability': [1/dice_sides] * die_sides},
+        {'Probability': [1/dice_sides] * dice_sides},
         index=range(1, die_sides + 1)
     )
     st.bar_chart(single_die_data)
