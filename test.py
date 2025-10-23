@@ -81,7 +81,7 @@ if not st.session_state.show_dashboard:
         - **Project:** Mint – Mathematik Projekt 2
         - **Topic:** Würfeln und der Zentrale Grenzwertsatz / Rolling dice and the Central Limit Theorem
         - **Controls:** Use the sidebar (on the next page) to change parameters like:
-            - Die Type (6-sided or 12-sided)
+            - Dice Type (6-sided or 12-sided)
             - Rolls per Experiment (N)
             - Number of Experiments (Samples)
         """)
