@@ -184,3 +184,79 @@ else:
         ax.set_ylabel("Density")
         ax.legend()
         ax.grid(axis='y', linestyle='--', alpha=0.7)
+        st.pyplot(fig)
+
+        st.header("The 'Before' Picture: Distribution of a Single Die Roll")
+        st.markdown("The CLT is powerful because it takes a *uniform* distribution (one die roll) and produces a *normal* distribution (a bell curve) when you sum many of them.")
+        
+        single_die_data = pd.DataFrame(
+            {'Probability': [1/die_sides] * die_sides},
+            index=range(1, die_sides + 1)
+        )
+        st.bar_chart(single_die_data)
+
+    with tab_stats:
+        st.header("In-Depth Statistical Analysis")
+        
+        st.subheader("Theoretical vs. Actual Statistics")
+        col1, col2 = st.columns(2)
+        with col1:
+            st.metric("Theoretical Mean (μ)", f"{mu:.3f}")
+            st.metric("Theoretical Variance (σ²)", f"{variance:.3f}")
+        with col2:
+            st.metric("Actual Mean (from data)", f"{actual_mean:.3f}")
+            st.metric("Actual Variance (from data)", f"{actual_var:.3f}")
+
+        st.subheader("Distribution Shape Statistics")
+        cols = st.columns(3)
+        cols[0].metric("Median", f"{actual_median:.3f}", help="The 50th percentile (middle value).")
+        cols[1].metric("Skewness", f"{actual_skew:.3f}", help="Measures asymmetry (Normal=0).")
+        cols[2].metric("Kurtosis (Fisher)", f"{actual_kurt:.3f}", help="Measures 'tailedness' (Normal=0).")
+
+        st.subheader("Professional Normality Tests")
+        col1, col2 = st.columns([1, 2])
+        
+        with col1:
+            st.subheader("Shapiro-Wilk Test")
+            if p_value is None:
+                st.error("Test requires at least 3 experiments to run.")
+            else:
+                st.metric("p-value", f"{p_value:.4f}")
+                if p_value > 0.05:
+                    st.success("**Conclusion:** The data appears to be normally distributed. (p > 0.05)")
+                else:
+                    st.warning("**Conclusion:** The data does *not* appear to be normally distributed. (p <= 0.05)")
+            
+        with col2:
+            st.subheader("Q-Q (Quantile-Quantile) Plot")
+            fig_qq, ax_qq = plt.subplots(figsize=(6, 6))
+            stats.probplot(results, dist="norm", plot=ax_qq)
+            ax_qq.set_title("Normal Q-Q Plot")
+            ax_qq.set_xlabel("Theoretical Quantiles")
+            ax_qq.set_ylabel("Sample Quantiles")
+            st.pyplot(fig_qq)
+            st.markdown("If the data is normal, the blue dots should lie on the red line.")
+            
+        with st.expander(f"Show Raw Data Table ({num_experiments} rows)"):
+            df = pd.DataFrame({
+                "Experiment #": range(1, num_experiments + 1),
+                "Sum": results
+            })
+            st.dataframe(df, height=300, use_container_width=True)
+
+    with tab_info:
+        st.header("About The Project")
+        st.markdown("""
+        This dashboard simulates the **MINT Projekt 2** on the **Central Limit Theorem (CLT)**.
+        
+        ### The Original Experiment (E1)
+        * [cite_start]**Task:** Roll a 6-sided die 20 times and sum the results. [cite: 7]
+        * [cite_start]**Group 1 ($G_1$):** Repeat this experiment 21 times. [cite: 6]
+        * [cite_start]**Group 2 ($G_2$):** Repeat this experiment 42 times. [cite: 11]
+        * [cite_start]**Goal:** Compare the resulting histogram to the specific Gaussian curve: [cite: 12]
+            [cite_start]$$f(x) = \\frac{1}{\\sqrt{2\\pi\\sigma^{2}}} \\exp\\left(-\\frac{(x-70)^{2}}{2\\sigma^{2}}\\right)$$ [cite: 14]
+            [cite_start]...where $\\mu = 70$ and $\\sigma^{2} = 20 \cdot \\frac{35}{12}$. [cite: 14, 16]
+            
+        ### This Dashboard
+        [cite_start]This app allows you to run the simulation and also interactively explore the **Zusatzfrage (Additional Question)** by changing the die type from 6-sided to 12-sided. [cite: 21] You can also see the effect of changing the number of rolls (N) and the number of experiments (Samples).
+        """)
