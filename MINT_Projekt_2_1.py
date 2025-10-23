@@ -94,7 +94,7 @@ else:
 
 # --- Main Page Layout ---
 st.title("🎲 Central Limit Theorem Dashboard")
-st.markdown(f"Simulating **{num_experiments}** experiments, each summing **{num_rolls}** rolls of a **{die_sides}-sided** die.")
+st.markdown(f"Simulating **{num_experiments}** experiments, each summing **{num_rolls}** rolls of a **{dide_sides}-sided** die.")
 
 # --- Tabs for Content ---
 tab_main, tab_stats, tab_info = st.tabs(
