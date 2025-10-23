@@ -43,11 +43,11 @@ def start_simulation():
 # --- 2. WELCOME PAGE LOGIC ---
 if not st.session_state.show_dashboard:
     
-    st.title("🎲 Welcome to the MINT Projekt 2")
+    st.title("🎲 Welcome to the MINT Mathematics Project 2")
     st.title("Central Limit Theorem Dashboard")
     
     st.markdown("""
-    This interactive dashboard is a simulation for the **MINT Projekt 2**, demonstrating the
+    This interactive dashboard is a simulation for the **MINT Mathematics Project 2**, demonstrating the
     **Central Limit Theorem (CLT)** in action.
     
     - **Experiment:** See what happens when you roll a die 20 times and sum the results.
