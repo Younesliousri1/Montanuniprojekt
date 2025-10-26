@@ -184,13 +184,13 @@ else:
         ax.legend()
         ax.grid(axis='y', linestyle='--', alpha=0.7)
         st.pyplot(fig)
-        st.header("The 'Before' Picture: Distribution of a Single Die Roll")
-        st.markdown("The CLT is powerful because it takes a *uniform* distribution (one die roll) and produces a *normal* distribution (a bell curve) when you sum many of them.")
-        single_die_data = pd.DataFrame(
-            {'Probability': [1/die_sides] * die_sides},
-            index=range(1, die_sides + 1)
+        st.header("The 'Before' Picture: Distribution of a Single Dice Roll")
+        st.markdown("The CLT is powerful because it takes a *uniform* distribution (one dice roll) and produces a *normal* distribution (a bell curve) when you sum many of them.")
+        single_dice_data = pd.DataFrame(
+            {'Probability': [1/dice_sides] * dice_sides},
+            index=range(1, dice_sides + 1)
         )
-        st.bar_chart(single_die_data)
+        st.bar_chart(single_dice_data)
 
     with tab_stats:
         st.header("In-Depth Statistical Analysis")
