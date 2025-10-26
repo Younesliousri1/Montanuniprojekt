@@ -168,8 +168,9 @@ else:
     with tab_main:
         st.header("Histogram vs. Theoretical Gaussian Curve")
         fig, ax = plt.subplots(figsize=(10, 6))
+        n = num_experiments
         k = int(math.sqrt(n))
-                min_val = int(mu - 4*sigma)
+        min_val = int(mu - 4*sigma)
         max_val = int(mu + 4*sigma)
         ax.hist(results, bins=k, range=(min_val, max_val), density=True, alpha=0.7,
                 edgecolor='black', label=f'Histogram of {n} Results (k={k} bins)')
