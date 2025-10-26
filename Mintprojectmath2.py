@@ -172,9 +172,9 @@ else:
         class_width = max(1, int(sigma / 3))
         min_val = int(mu - 4*sigma)
         max_val = int(mu + 4*sigma)
-        #bins = np.arange(min_val, max_val + class_width, class_width)
+        bins = np.arange(min_val, max_val + class_width, class_width)
         
-        ax.hist(results, bins=6, density=True, alpha=0.7,
+        ax.hist(results, bins=bins, density=True, alpha=0.7,
                 edgecolor='black', label=f'Histogram of {num_experiments} Results')
         
         x_curve = np.linspace(min_val, max_val, 300)
