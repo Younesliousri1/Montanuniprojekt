@@ -168,35 +168,28 @@ else:
     with tab_main:
         st.header("Histogram vs. Theoretical Gaussian Curve")
         fig, ax = plt.subplots(figsize=(10, 6))
-        
-        class_width = max(1, int(sigma / 3))
-        min_val = int(mu - 4*sigma)
+        k = int(math.sqrt(n))
+                min_val = int(mu - 4*sigma)
         max_val = int(mu + 4*sigma)
-        bins = np.arange(min_val, max_val + class_width, class_width)
-        
-        ax.hist(results, bins=bins, density=True, alpha=0.7,
-                edgecolor='black', label=f'Histogram of {num_experiments} Results')
-        
+        ax.hist(results, bins=k, range=(min_val, max_val), density=True, alpha=0.7,
+                edgecolor='black', label=f'Histogram of {n} Results (k={k} bins)')
         x_curve = np.linspace(min_val, max_val, 300)
         y_curve = [gaussian_curve(val, mu, variance) for val in x_curve]
         ax.plot(x_curve, y_curve, 'r-', linewidth=2,
                 label=f'Gaussian Curve (μ={mu:.2f}, σ²={variance:.2f})')
-        
         ax.set_title("Distribution of Sums vs. Normal Distribution")
         ax.set_xlabel(f"Sum of {num_rolls} Dice Rolls")
         ax.set_ylabel("Density")
         ax.legend()
         ax.grid(axis='y', linestyle='--', alpha=0.7)
         st.pyplot(fig)
-
-        st.header("The 'Before' Picture: Distribution of a Single Dice Roll")
-        st.markdown("The CLT is powerful because it takes a *uniform* distribution (one dice roll) and produces a *normal* distribution (a bell curve) when you sum many of them.")
-        
-        single_dice_data = pd.DataFrame(
-            {'Probability': [1/dice_sides] * dice_sides},
-            index=range(1, dice_sides + 1)
+        st.header("The 'Before' Picture: Distribution of a Single Die Roll")
+        st.markdown("The CLT is powerful because it takes a *uniform* distribution (one die roll) and produces a *normal* distribution (a bell curve) when you sum many of them.")
+        single_die_data = pd.DataFrame(
+            {'Probability': [1/die_sides] * die_sides},
+            index=range(1, die_sides + 1)
         )
-        st.bar_chart(single_dice_data)
+        st.bar_chart(single_die_data)
 
     with tab_stats:
         st.header("In-Depth Statistical Analysis")
