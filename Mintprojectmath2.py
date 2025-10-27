@@ -209,8 +209,8 @@ else:
         cols[0].metric("Median", f"{actual_median:.3f}", help="The 50th percentile (middle value).")
         cols[1].metric("Skewness", f"{actual_skew:.3f}", help="Measures asymmetry (Normal=0).")
         cols[2].metric("Kurtosis (Fisher)", f"{actual_kurt:.3f}", help="Measures 'tailedness' (Normal=0).")
-
-        st.subheader("Professional Normality Tests")
+#Professional
+        st.subheader("Normality Tests")
         col1, col2 = st.columns([1, 2])
         
         with col1:
